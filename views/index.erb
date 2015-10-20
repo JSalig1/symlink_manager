@@ -1,1 +1,3 @@
-<%= @directories %>
+<% @directories.each do |directory| %>
+  <%= directory.name %>
+<% end %>
