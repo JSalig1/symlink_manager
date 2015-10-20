@@ -1,3 +1,6 @@
-<% @directories.each do |directory| %>
-  <%= directory.name %>
-<% end %>
+<h1>User Folders</h1>
+<ul>
+  <% @directories.each do |directory| %>
+    <li><a href="/user-folders/<%= directory.name %>"><%= directory.name %></a></li>
+  <% end %>
+</ul>
