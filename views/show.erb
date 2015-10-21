@@ -1,1 +1,6 @@
 <h1><%= "User Folder: #{ @directory.basename }" %></h1>
+<ul>
+  <% @symlinks.each do |symlink| %>
+    <li><%= symlink.basename %></li>
+  <% end %>
+</ul>
