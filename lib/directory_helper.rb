@@ -2,7 +2,7 @@ class DirectoryHelper
   include Singleton
 
   def initialize
-    @path = Pathname.new(ENV['SERVER_PATH'])
+    @path = Pathname.new(ENV['LOCAL_PATH'])
     @protected_directories = ENV['PROTECTED_DIRECTORIES']
   end
 
@@ -16,6 +16,10 @@ class DirectoryHelper
 
   def find_symlinks_for(directory)
     directory.children.select(&only_directories)
+  end
+
+  def new(folder_name)
+    Pathname.new(@path + folder_name).mkdir
   end
 
   private

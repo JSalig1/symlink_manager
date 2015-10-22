@@ -1,4 +1,5 @@
 <h1>User Folders</h1>
+<div><a href="/user-folders/new">Add New User Folder</a></div>
 <ul>
   <% @directories.each do |directory| %>
     <li><a href="/user-folders/<%= directory.basename %>"><%= directory.basename %></a></li>
