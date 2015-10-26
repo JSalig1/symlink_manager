@@ -5,6 +5,7 @@ require 'pathname'
 require './lib/directory_helper'
 require './lib/directories_controller'
 require './lib/symlinks_controller'
+require './lib/projects_controller'
 
 Dotenv.load
 
@@ -23,7 +24,18 @@ get "/user-folders/:user" do
   erb :show
 end
 
+get "/:user/new" do
+  @user_folder = params[:user]
+  @project_directories = ProjectsController.instance.index
+  erb :new_symlink
+end
+
 post '/user-folders' do
   DirectoriesController.instance.create(params[:folder_name])
+  redirect "/"
+end
+
+post '/:user/symlinks' do
+  SymlinksController.instance.create(params[:user], params[:symlink_name])
   redirect "/"
 end
