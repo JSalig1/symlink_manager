@@ -2,7 +2,7 @@ class DirectoryHelper
   include Singleton
 
   def initialize
-    @path = Pathname.new(ENV['LOCAL_PATH'])
+    @path = Pathname.new(ENV['SERVER_PATH'])
     @protected_directories = [ENV['PROJECT_TEMPLATE'], ENV['PROJECTS_DIRECTORY']]
   end
 
@@ -28,9 +28,9 @@ class DirectoryHelper
   end
 
   def new_symlink(user, project_directory)
-    target = @path + @protected_directories[1] + project_directory
-    symlink_location = @path + user
-    `ln -s #{target} #{symlink_location}`
+    if @path.to_s == ENV['SERVER_PATH']
+      SecureShell.new(user, project_directory)
+    end
   end
 
   private
