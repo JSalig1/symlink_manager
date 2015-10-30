@@ -2,6 +2,7 @@ require 'sinatra'
 require 'dotenv'
 require 'singleton'
 require 'pathname'
+require 'net/ssh'
 require './lib/directory_helper'
 require './lib/secure_shell'
 require './lib/directories_controller'
@@ -38,5 +39,10 @@ end
 
 post '/:user/symlinks' do
   SymlinksController.instance.create(params[:user], params[:symlink_name])
+  redirect "/"
+end
+
+delete '/:user/:symlink_name' do
+  SymlinksController.instance.destroy(params[:user], params[:symlink_name])
   redirect "/"
 end

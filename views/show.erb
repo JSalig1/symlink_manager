@@ -2,6 +2,13 @@
 <div><a href="/<%= @directory.basename %>/new">Add New Project Link</a></div>
 <ul>
   <% @symlinks.each do |symlink| %>
-    <li><%= symlink.basename %></li>
+    <li>
+    <%= symlink.basename %>
+    <form method="POST" action="/<%= @directory.basename %>/<%= symlink.basename %>">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Remove">
+    </form>
+
+    </li>
   <% end %>
 </ul>

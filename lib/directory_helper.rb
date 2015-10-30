@@ -27,9 +27,17 @@ class DirectoryHelper
     Pathname.new(@path + folder_name).mkdir
   end
 
-  def new_symlink(user, project_directory)
+  def new_symlink(user, symlink_name)
     if @path.to_s == ENV['SERVER_PATH']
-      SecureShell.new(user, project_directory)
+      secure_shell = SecureShell.new(user, symlink_name)
+      secure_shell.create_symlink
+    end
+  end
+
+  def destroy_symlink(user, symlink_name)
+    if @path.to_s == ENV['SERVER_PATH']
+      secure_shell = SecureShell.new(user, symlink_name)
+      secure_shell.remove_symlink
     end
   end
 

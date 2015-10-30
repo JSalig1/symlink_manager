@@ -1,23 +1,39 @@
-require 'net/ssh'
-
 class SecureShell
-  def initialize(user, project_directory)
-    @target = project_directory
+  def initialize(user, symlink_name)
+    @target = symlink_name
     @user = user
-    create_symlink
+
+    @session = Net::SSH.start(
+      ENV['SERVER_HOST'],
+      ENV['SERVER_USER'],
+      password: ENV['SERVER_PASSWORD']
+    )
+  end
+
+
+  def create_symlink
+    command = generate_create
+    puts command
+    @session.exec!(command)
+    puts "Symlink created: #{@user} -> #{@target}"
+    @session.close
+  end
+
+  def remove_symlink
+    command = generate_remove
+    puts command
+    @session.exec!(command)
+    puts "Symlink removed: #{@user} X #{@target}"
+    @session.close
   end
 
   private
 
-  def create_symlink
-    Net::SSH.start(ENV['SERVER_HOST'], ENV['SERVER_USER'], password: ENV['SERVER_PASSWORD']) do |ssh|
-      command = generate_command_string
-      output = ssh.exec!(command)
-      puts output
-    end
+  def generate_create
+    "ln -s #{ENV['PATH_TO_PROJECT'] + @target} #{ENV['PATH_TO_USER'] + @user}/"
   end
 
-  def generate_command_string
-    "ln -s #{ENV['PATH_TO_PROJECT'] + @target} #{ENV['PATH_TO_USER'] + @user}/"
+  def generate_remove
+    "rm #{ENV['PATH_TO_USER'] + @user}/" + @target
   end
 end
