@@ -9,7 +9,7 @@ require './lib/secure_shell'
 Dotenv.load
 
 get "/" do
-  @directories = DirectoryHelper.instance.all
+  @directories = DirectoryHelper.instance.find_all_user_directories
   erb :index
 end
 
@@ -18,7 +18,7 @@ get "/user-folders/new" do
 end
 
 get "/user-folders/:user" do
-  @directory = DirectoryHelper.instance.find_by(params[:user])
+  @directory = DirectoryHelper.instance.find_user_directory_by(params[:user])
   @symlinks = DirectoryHelper.instance.find_symlinks_for(@directory)
   erb :show
 end
@@ -30,12 +30,12 @@ get "/:user/new" do
 end
 
 post '/user-folders' do
-  DirectoryHelper.instance.new(params[:folder_name])
+  DirectoryHelper.instance.create_new_user_directory(params[:folder_name])
   redirect "/"
 end
 
 post '/:user/symlinks' do
-  DirectoryHelper.instance.new_symlink(params[:user], params[:symlink_name])
+  DirectoryHelper.instance.create_new_symlink(params[:user], params[:symlink_name])
   redirect "/"
 end
 

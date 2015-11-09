@@ -3,15 +3,15 @@ class DirectoryHelper
 
   def initialize
     @path = Pathname.new(ENV['SERVER_PATH'])
-    @protected_directories = [ENV['PROJECT_TEMPLATE'], ENV['PROJECTS_DIRECTORY']]
+    @project_directories = [ENV['PROJECT_TEMPLATE'], ENV['PROJECTS_DIRECTORY']]
   end
 
-  def all
-    @path.children.select(&only_directories).reject(&protected_directories)
+  def find_all_user_directories
+    @path.children.select(&only_directories).reject(&project_directories)
   end
 
-  def find_by(name)
-    @path + name
+  def find_user_directory_by(user)
+    @path + user
   end
 
   def find_symlinks_for(directory)
@@ -23,11 +23,11 @@ class DirectoryHelper
     project_directory.children.select(&only_directories)
   end
 
-  def new(folder_name)
+  def create_new_user_directory(folder_name)
     Pathname.new(@path + folder_name).mkdir
   end
 
-  def new_symlink(user, symlink_name)
+  def create_new_symlink(user, symlink_name)
     if @path.to_s == ENV['SERVER_PATH']
       secure_shell = SecureShell.new(user, symlink_name)
       secure_shell.create_symlink
@@ -47,7 +47,7 @@ class DirectoryHelper
     Proc.new { |path| path.directory? }
   end
 
-  def protected_directories
-    Proc.new { |path| @protected_directories.include? path.basename.to_s }
+  def project_directories
+    Proc.new { |path| @project_directories.include? path.basename.to_s }
   end
 end
