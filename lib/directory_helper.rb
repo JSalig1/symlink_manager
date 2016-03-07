@@ -44,7 +44,7 @@ class DirectoryHelper
   private
 
   def only_directories
-    Proc.new { |path| path.directory? }
+    Proc.new { |path| path.directory? || path.symlink? }
   end
 
   def project_directories

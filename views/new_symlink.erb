@@ -1,6 +1,6 @@
 <h1>Add New Project Link</h1>
 
-<form method="POST" action="/<%= @user_folder %>/symlinks">
+<form method="POST" action="/<%= ENV['SUB_DIR'] %>/<%= @user_folder %>/symlinks">
   <label>Link to project:</label>
   <select name="symlink_name">
     <% @project_directories.each do |directory| %>

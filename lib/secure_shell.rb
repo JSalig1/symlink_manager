@@ -13,17 +13,13 @@ class SecureShell
 
   def create_symlink
     command = generate_create
-    puts command
     @session.exec!(command)
-    puts "Symlink created: #{@user} -> #{@target}"
     @session.close
   end
 
   def remove_symlink
     command = generate_remove
-    puts command
     @session.exec!(command)
-    puts "Symlink removed: #{@user} X #{@target}"
     @session.close
   end
 
