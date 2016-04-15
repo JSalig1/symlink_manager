@@ -1,7 +1,7 @@
 <h1>User Folders</h1>
-<div><a href="/<%= ENV['SUB_DIR'] %>/user-folders/new">Add New User Folder</a></div>
+<div><a href="<%= ENV['SUB_DIR'] %>/user-folders/new">Add New User Folder</a></div>
 <ul>
   <% @directories.each do |directory| %>
-    <li><a href="/<%= ENV['SUB_DIR'] %>/user-folders/<%= directory.basename %>"><%= directory.basename %></a></li>
+    <li><a href="<%= ENV['SUB_DIR'] %>/user-folders/<%= directory.basename %>"><%= directory.basename %></a></li>
   <% end %>
 </ul>
