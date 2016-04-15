@@ -31,15 +31,15 @@ end
 
 post "#{ENV['SUB_DIR']}/user-folders" do
   DirectoryHelper.instance.create_new_user_directory(params[:folder_name])
-  redirect "/#{ENV['SUB_DIR']}/"
+  redirect "#{ENV['SUB_DIR']}/"
 end
 
 post "#{ENV['SUB_DIR']}/:user/symlinks" do
   DirectoryHelper.instance.create_new_symlink(params[:user], params[:symlink_name])
-  redirect "/#{ENV['SUB_DIR']}/"
+  redirect "#{ENV['SUB_DIR']}/"
 end
 
 delete "#{ENV['SUB_DIR']}/:user/:symlink_name" do
   DirectoryHelper.instance.destroy_symlink(params[:user], params[:symlink_name])
-  redirect "/#{ENV['SUB_DIR']}/"
+  redirect "#{ENV['SUB_DIR']}/"
 end
