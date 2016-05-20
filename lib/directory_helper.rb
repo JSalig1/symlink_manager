@@ -7,7 +7,7 @@ class DirectoryHelper
   end
 
   def find_all_user_directories
-    @path.children.select(&only_directories).reject(&project_directories)
+    @path.children.select(&only_directories).reject(&project_directories).sort_by(&downstring)
   end
 
   def find_user_directory_by(user)
@@ -49,5 +49,9 @@ class DirectoryHelper
 
   def project_directories
     Proc.new { |path| @project_directories.include? path.basename.to_s }
+  end
+
+  def downstring
+    Proc.new { |path| path.basename.to_s.downcase }
   end
 end
