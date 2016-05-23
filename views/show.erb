@@ -1,4 +1,4 @@
-<h1><%= "User Folder: #{ @directory.basename }" %></h1>
+<h2><%= "User Folder: #{ @directory.basename }" %></h2>
 <div><a href="<%= ENV['SUB_DIR'] %>/<%= @directory.basename %>/new">Add New Project Link</a></div>
 <ul>
   <% @symlinks.each do |symlink| %>
