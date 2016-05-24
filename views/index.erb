@@ -1,7 +1,16 @@
-<h2>User Folders</h2>
-<div><a href="<%= ENV['SUB_DIR'] %>/user-folders/new">Add New User Folder</a></div>
-<ul>
-  <% @directories.each do |directory| %>
-    <li><a href="<%= ENV['SUB_DIR'] %>/user-folders/<%= directory.basename %>"><%= directory.basename %></a></li>
-  <% end %>
-</ul>
+<div class="content">
+  <div class="container-border">
+    <h3>User Folders</h3>
+    <div class="job-folders-container">
+      <% @directories.each do |directory| %>
+        <div class="clickable-folder">
+          <a href="<%= ENV['SUB_DIR'] %>/user-folders/<%= directory.basename %>"><%= directory.basename %></a>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="button">
+  <a href="<%= ENV['SUB_DIR'] %>/user-folders/new">New User Folder</a>
+</div>
