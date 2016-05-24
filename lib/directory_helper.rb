@@ -20,7 +20,7 @@ class DirectoryHelper
 
   def find_all_project_directories
     project_directory = @path + "0_PROJECTS"
-    project_directory.children.select(&only_directories)
+    project_directory.children.select(&only_directories).sort_by(&downstring)
   end
 
   def create_new_user_directory(folder_name)

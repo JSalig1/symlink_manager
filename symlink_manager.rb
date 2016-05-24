@@ -9,7 +9,8 @@ require './lib/secure_shell'
 Dotenv.load
 
 get "#{ENV['SUB_DIR']}/" do
-  @directories = DirectoryHelper.instance.find_all_user_directories
+  @user_directories = DirectoryHelper.instance.find_all_user_directories
+  @project_directories = DirectoryHelper.instance.find_all_project_directories
   erb :index
 end
 
