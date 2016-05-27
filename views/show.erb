@@ -1,13 +1,31 @@
-<h2><%= "User Folder: #{ @directory.basename }" %></h2>
-<div><a href="<%= ENV['SUB_DIR'] %>/<%= @directory.basename %>/new">Add New Project Link</a></div>
-<ul>
-  <% @symlinks.each do |symlink| %>
-    <li>
-      <%= symlink.basename %>
-      <form method="POST" action="<%= ENV['SUB_DIR'] %>/<%= @directory.basename %>/<%= symlink.basename %>">
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="Remove">
-      </form>
-    </li>
-  <% end %>
-</ul>
+<div class="content">
+
+  <div class="container-border">
+    <h3><%= "User Folder: #{ @directory.basename }" %></h3>
+    <div class="job-folders-container">
+      <div class="job-folder">
+        <%= @directory.basename %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-border">
+    <h3><%= "Currently Linked Projects" %></h3>
+    <div class="job-folders-container">
+      <% @symlinks.each do |symlink| %>
+        <div class="linked-project-folder">
+        <div class="linked-project-label"><%= symlink.basename %></div>
+        <form method="POST" action="<%= ENV['SUB_DIR'] %>/<%= @directory.basename %>/<%= symlink.basename %>">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="X">
+        </form>
+      </div>
+    <% end %>
+    </div>
+  </div>
+
+</div>
+
+<div class="button">
+  <a href="<%= ENV['SUB_DIR'] %>/<%= @directory.basename %>/new">Add New Project Link</a>
+</div>
