@@ -27,6 +27,10 @@ class DirectoryHelper
     Pathname.new(@path + folder_name).mkdir
   end
 
+  def create_new_project_directory(folder_name)
+    Pathname.new(@path + "0_PROJECTS" + folder_name).mkdir
+  end
+
   def create_new_symlink(user, symlink_name)
     if @path.to_s == ENV['SERVER_PATH']
       secure_shell = SecureShell.new(user, symlink_name)

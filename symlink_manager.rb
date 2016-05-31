@@ -15,7 +15,11 @@ get "#{ENV['SUB_DIR']}/" do
 end
 
 get "#{ENV['SUB_DIR']}/user-folders/new" do
-  erb :new
+  erb :new_user
+end
+
+get "#{ENV['SUB_DIR']}/project-folders/new" do
+  erb :new_project
 end
 
 get "#{ENV['SUB_DIR']}/user-folders/:user" do
@@ -32,6 +36,11 @@ end
 
 post "#{ENV['SUB_DIR']}/user-folders" do
   DirectoryHelper.instance.create_new_user_directory(params[:folder_name])
+  redirect "#{ENV['SUB_DIR']}/"
+end
+
+post "#{ENV['SUB_DIR']}/project-folders" do
+  DirectoryHelper.instance.create_new_project_directory(params[:folder_name])
   redirect "#{ENV['SUB_DIR']}/"
 end
 

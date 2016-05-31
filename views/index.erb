@@ -1,29 +1,37 @@
 <div class="content">
-
-  <div class="container-border">
-    <h3>User Folders</h3>
-    <div class="job-folders-container">
-      <% @user_directories.each do |user_directory| %>
-        <div class="clickable-folder">
-          <a href="<%= ENV['SUB_DIR'] %>/user-folders/<%= user_directory.basename %>"><%= user_directory.basename %></a>
+  <div>
+    <div class="container-border">
+      <h3>User Folders</h3>
+      <div class="job-folders-container">
+        <% @user_directories.each do |user_directory| %>
+          <div class="clickable-folder">
+            <a href="<%= ENV['SUB_DIR'] %>/user-folders/<%= user_directory.basename %>"><%= user_directory.basename %></a>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+
+    <div class="button">
+      <a href="<%= ENV['SUB_DIR'] %>/user-folders/new">New User Folder</a>
     </div>
   </div>
 
-  <div class="container-border">
-    <h3>Project Folders</h3>
-    <div class="job-folders-container">
-      <% @project_directories.each do |project_directory| %>
-        <div class="job-folder">
-          <%= project_directory.basename %>
+  <div>
+    <div class="container-border">
+      <h3>Project Folders</h3>
+      <div class="job-folders-container">
+        <% @project_directories.each do |project_directory| %>
+          <div class="job-folder">
+            <%= project_directory.basename %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+
+    <div class="button">
+      <a href="<%= ENV['SUB_DIR'] %>/project-folders/new">New Project Folder</a>
     </div>
   </div>
 
 </div>
 
-<div class="button">
-  <a href="<%= ENV['SUB_DIR'] %>/user-folders/new">New User Folder</a>
-</div>
