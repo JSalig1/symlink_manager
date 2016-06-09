@@ -4,9 +4,7 @@
       <h3>User Folders</h3>
       <div class="job-folders-container">
         <% @user_directories.each do |user_directory| %>
-          <div class="clickable-folder">
-            <a href="<%= ENV['SUB_DIR'] %>/user-folders/<%= user_directory.basename %>"><%= user_directory.basename %></a>
-          </div>
+          <a class="job-folder" href="<%= ENV['SUB_DIR'] %>/user-folders/<%= user_directory.basename %>"><%= user_directory.basename %></a>
         <% end %>
       </div>
     </div>
