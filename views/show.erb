@@ -14,13 +14,15 @@
     <div class="job-folders-container">
       <% @symlinks.each do |symlink| %>
         <div class="linked-project-folder">
-        <div class="linked-project-label"><%= symlink.basename %></div>
-        <form method="POST" action="<%= ENV['SUB_DIR'] %>/<%= @directory.basename %>/<%= symlink.basename %>">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="X">
-        </form>
-      </div>
-    <% end %>
+          <div class="linked-project-label">
+            <%= symlink.basename %>
+          </div>
+          <form method="POST" action="<%= ENV['SUB_DIR'] %>/<%= @directory.basename %>/<%= symlink.basename %>">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="X">
+          </form>
+        </div>
+      <% end %>
     </div>
   </div>
 
